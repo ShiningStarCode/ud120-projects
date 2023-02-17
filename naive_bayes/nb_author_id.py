@@ -12,20 +12,34 @@
     
 import sys
 from time import time
-sys.path.append("../tools/")
-from email_preprocess import preprocess
+sys.path.append("/Users/nkoa/Documents/GitHub/ud120-projects")
+from tools.email_preprocess import preprocess
 
 
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
+
 features_train, features_test, labels_train, labels_test = preprocess()
 
 
 ##############################################################
 # Enter Your Code Here
 
+from sklearn.naive_bayes import GaussianNB
 
+# Create a Gaussian Naive Bayes classifier
+clf = GaussianNB()
+
+# Train the classifier using the training data
+t0 = time()
+clf.fit(features_train, labels_train)
+print("Training Time:", round(time()-t0, 3), "s")
+
+# Make predictions on the test data
+t0 = time()
+pred = clf.predict(features_test)
+print("Predicting Time:", round(time()-t0, 3), "s")
 
 ##############################################################
 
